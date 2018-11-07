@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>Lab</title>
+    <style>
+        .dragTarget {
+            float: left;
+            width: 400px;
+            height: 300px;
+            padding: 10px;
+            border: 2px solid gray;
+            margin: 10px;
+        }
+
+        .dragOver {
+            border: dashed red;
+        }
+
+        div.flagList {
+            clear: both;
+        }
+
+            div.flagList img {
+                clear: both;
+                margin: 25px;
+            }
+    </style>
+</head>
+<body>
+    <div id="divphoto" class="dragTarget">photo</div>
+
+ 
+
+     <!--相關屬性
+        1.draggable 属性规定元素是否可拖动
+        2.ondragstart 在拖动操作开端运行的脚本	
+    -->
+    
+    <div class="flagList">
+        <img id="photo1" draggable="true" ondragstart="doDragStart(event)" 
+        src="choose_photo1.jpg" />
+        <img id="imgCanada" draggable="true" src="images/Canada.png" />
+        <img id="imgJapan" draggable="true" src="images/Japan.png">
+    </div>
+
+    <div id="debug"></div>
+
+<script>
+    function doDragStart(e){
+         document.getElementById("debug").innerHTML+=e.target.id+" start dragging. <br/>";
+        e.target.style.opacity='0.4'; //點選拖曳時產生半透明
+         //dataTransfer.setData() 方法设置被拖数据的数据类型和值：,之後用在doDrop---Get資料出來
+        e.dataTransfer.setData("text/plain",e.target.id);
+    }
+        //加拿大跟日本用兩種不同的方法!
+        imgCanada.ondragstart=doDragStart;
+        //http://www.runoob.com/jsref/met-element-addeventlistener.html
+        //addEventListener() 方法用于向指定元素添加事件句柄。 .addEventListener(event, function, useCapture)
+        imgJapan.addEventListener("dragstart",doDragStart);  //event前面可剃除前縐詞 如使用 "click" ,而不是使用 "onclick"。 ondragstart ,"dragstart" 
+       
+       
+    function doDragOver(e){
+        // document.getElementById("debug").innerHTML+=e.target.id+"- OnDragOver<br />";
+        //阻止元素发生默认的行为
+        e.preventDefault();
+    }    
+         divUsa.ondragover = doDragOver;
+         divJapan.ondragover = doDragOver;
+         divCanada.ondragover = doDragOver;
+         
+    function doDragEnter(e){
+         document.getElementById("debug").innerHTML+=e.target.id+"- OnDragEnter<br />";
+         e.target.classList.add("dragOver"); //event前面可剃除前縐詞 如使用 "click" ,而不是使用 "onclick"。 ondragOver ,"dragOver" 
+         e.preventDefault();
+    } 
+    
+    function doDragLeave(e) {
+            document.getElementById("debug").innerHTML += e.target.id + " - OnDragLeave<br />";
+            e.target.classList.remove("dragOver");
+            e.preventDefault();
+        }
+        
+        divUsa.ondragenter = doDragEnter;
+        divUsa.ondragleave = doDragLeave;
+        divJapan.ondragenter = doDragEnter;
+        divJapan.ondragleave = doDragLeave;
+        divCanada.ondragenter = doDragEnter;
+        divCanada.ondragleave = doDragLeave;
+        
+        
+    // 滑鼠按鍵放開時的 Drop 事件
+    function doDrop(e){
+        document.getElementById("debug").innerHTML+=e.target.id+" - OnDrop<br />";
+        var sSourceId=e.dataTransfer.getData("text/plain"); //前面有setData
+        if(sSourceId.substr(3,99)==e.target.id.substr(3,99)) //比對拖曳的圖片ID與原始ID是否一致
+         {
+            e.target.appendChild(document.getElementById(sSourceId));
+         }
+        document.getElementById(sSourceId).style.opacity=1.0;
+        e.target.classList.remove("dragOver");
+        //document.getElementById("debug").innerHTML += "Info: " + sSourceId + "<br />";
+        e.preventDefault();
+
+    }
+      //副程式比對一致就放入div裡面
+      //.ondrop 在可拖动元素放置在 <div> 元素中时执行 JavaScript:
+      divUsa.ondrop = doDrop;
+      divJapan.ondrop = doDrop;
+      divCanada.ondrop = doDrop;
+
+ 
+</script>
+
+</body>
+</html>
