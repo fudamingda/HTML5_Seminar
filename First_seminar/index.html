@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HTML5小專作品</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/creative.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!--自行調整樣式-->
+    <style>
+        /*#about{*/
+        /*    padding:50px;*/
+        /*}*/
+        
+        /*畫布rwd功能*/
+        @media screen and (max-width :400px){
+            .dragTarget,#myphoto,#myphoto2 {
+                 width: 85%;
+            }
+        }
+  
+        .dragTarget {
+            margin: 0 10px;
+            border: dashed #cccccc;
+            width: 400px;
+            height: 300px;
+        }
+        
+        .dragTarget .sourcephoto {
+            width: 100%;
+        }
+        
+        .dragOver {
+            border: dashed red;
+        }
+        
+        .item {
+            width: 100%;
+        }
+        
+        .photo {
+            /*width: 38%;*/
+            display: inline-block;
+        }
+        
+        
+        .choose .photocontent {
+            display: inline-block;
+        }
+        
+        .sourcephoto {
+            width: 10%;
+        }
+        
+        .container-fluid>.mycanvas2{
+            text-Align:center;
+        }
+        
+        /* .form >p {*/
+        /*    display:inline-block;*/
+        /*}*/
+        /*.form >div {*/
+        /*    display: inline-block;*/
+        /*}*/
+        
+        /*.form >div>.radio {*/
+        /*    display: inline-block;*/
+        /*}*/
+        
+        
+    
+    
+        hr{
+            max-width:0;
+        }
+        .btn{
+            font-size: 1.2em;
+        }
+          .modal-header, h4 , .close {
+            background-color: #5cb85c;
+            color: white;
+            text-align: center;
+            font-family:DFKai-SB;
+            font-size: 1.6em;
+        }
+        
+        .modal-body {
+            color: black;
+            font-family: Microsoft JhengHei;
+            text-Align:left;
+        }
+        
+        .modal-footer p{
+            text-Align:left;
+            font-size:0.9em;
+            color:#666666;
+        }
+        
+        
+        
+        
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">TRUTH OR DARE</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#about">製作老闆圖</a>
+                    </li>
+                    <!--<li>-->
+                    <!--    <a class="page-scroll" href="#services">Services</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a class="page-scroll" href="#portfolio">下載作品</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">聯絡我們</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">老闆請你聽我說</h1>
+                <hr>
+                <p>網站上文章若為網友投稿之創作，
+                本站對該文章的真實性、
+                完整性及立場…等不負任何法律責任，
+                而一切創作及言論只代表員工個人意見，非本網站之立場，
+                老闆應自行判斷內容真實性。</p>
+                <a href="#about" class="btn btn-primary btn-xl page-scroll">開始製作吧</a>
+            </div>
+        </div>
+    </header>
+    
+    <!--專案寫在這裡-->
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">有什麼話想送給你親愛的老闆呢?</h2>
+                    <p class="text-faded">該言論只代表員工個人意見，非本網站之立場，
+                    老闆應自行判斷內容真實性。</p>
+                    <hr class="light">
+                      <!--專案寫在這裡---start--->
+                    <div class="item">
+                        <div class="photo">
+                            <canvas class="dragTarget" id="myphoto" width="400" height="300"></canvas>
+                        </div>
+                        <!--放置圖片-->
+                        <!--相關屬性
+                        1.draggable 属性规定元素是否可拖动
+                        2.ondragstart 在拖动操作开端运行的脚本-->
+                        <div class="choose" style="display:inline">
+                            <div class="photocontent">
+                                <!--左右拖曳使用-->
+                                <img id="photo1" class="sourcephoto" src="choose_photo1.jpg" draggable="true" ondragstart="doDragStart(event)">
+                                <img id="photo2" class="sourcephoto" src="choose_photo2.jpg" draggable="true">
+                                <img id="photo3" class="sourcephoto" src="choose_photo3.jpg" draggable="true">
+                                <img id="photo4" class="sourcephoto" src="choose_photo4.jpg" draggable="true">
+                                <input class="btn btn-default" type="button" value="重新製作" onclick="location.href='index.html';">
+                            </div>
+                        </div>
+                        <form>
+                            <label for="textSample">請選擇範例文字 :</label>
+                            <label for="sel1"></label>
+                            <select class="form-control" id="sel1">
+                                <option value="1">歲末年終!荷包空空</option>
+                                <option value="2">早安!人生不是只有開會</option>
+                                <option value="3">這麼愛瞎忙,怎麼不去釣蝦</option>
+                                <option value="4">人生最大的財富就是健康!可以讓我放假嗎</option>
+                            </select>
+                            <div class=form>
+                                <p>選擇字體顏色: </p>
+                                <div class="font-color">
+                                    <div class="radio-inline">
+                                        <input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_1" value="red">
+                                        <label for="value_1">red</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_2" value="#003399">
+                                        <label for="value_1">Blue</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_3" value="Purple ">
+                                        <label for="value_1">Purple </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>             
+                    <!--專案寫在這裡---end--->
+
+                    <!--<p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>-->
+                    <!--<p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>-->
+                    <!--<p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>-->
+                    <a href="#portfolio" class="page-scroll btn btn-default btn-xl sr-button" onclick="bt1_onclick()">Get Started!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--<section id="services">-->
+    <!--    <div class="container">-->
+    <!--        <div class="row">-->
+    <!--            <div class="col-lg-12 text-center">-->
+    <!--                <h2 class="section-heading">At Your Service</h2>-->
+    <!--                <hr class="primary">-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="container">-->
+    <!--        <div class="row">-->
+    <!--            <div class="col-lg-3 col-md-6 text-center">-->
+    <!--                <div class="service-box">-->
+    <!--                    <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>-->
+    <!--                    <h3>Sturdy Templates</h3>-->
+    <!--                    <p class="text-muted">Our templates are updated regularly so they don't break.</p>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="col-lg-3 col-md-6 text-center">-->
+    <!--                <div class="service-box">-->
+    <!--                    <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>-->
+    <!--                    <h3>Ready to Ship</h3>-->
+    <!--                    <p class="text-muted">You can use this theme as is, or you can make changes!</p>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="col-lg-3 col-md-6 text-center">-->
+    <!--                <div class="service-box">-->
+    <!--                    <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>-->
+    <!--                    <h3>Up to Date</h3>-->
+    <!--                    <p class="text-muted">We update dependencies to keep things fresh.</p>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--            <div class="col-lg-3 col-md-6 text-center">-->
+    <!--                <div class="service-box">-->
+    <!--                    <i class="fa fa-4x fa-heart text-primary sr-icons"></i>-->
+    <!--                    <h3>Made with Love</h3>-->
+    <!--                    <p class="text-muted">You have to make your websites with love these days!</p>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</section>-->
+
+    <section class="no-padding" id="portfolio">
+        <div class="container-fluid">
+            <!--<div class="row no-gutter popup-gallery">-->
+            <!--    <div class="col-lg-4 col-sm-6">-->
+            <!--        <a href="img/portfolio/fullsize/1.jpg" class="portfolio-box">-->
+            <!--            <img src="img/portfolio/thumbnails/1.jpg" class="img-responsive" alt="">-->
+            <!--            <div class="portfolio-box-caption">-->
+            <!--                <div class="portfolio-box-caption-content">-->
+            <!--                    <div class="project-category text-faded">-->
+            <!--                        Category-->
+            <!--                    </div>-->
+            <!--                    <div class="project-name">-->
+            <!--                        Project Name-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </a>-->
+            <!--    </div>-->
+            <!--    <div class="col-lg-4 col-sm-6">-->
+            <!--        <a href="img/portfolio/fullsize/2.jpg" class="portfolio-box">-->
+            <!--            <img src="img/portfolio/thumbnails/2.jpg" class="img-responsive" alt="">-->
+            <!--            <div class="portfolio-box-caption">-->
+            <!--                <div class="portfolio-box-caption-content">-->
+            <!--                    <div class="project-category text-faded">-->
+            <!--                        Category-->
+            <!--                    </div>-->
+            <!--                    <div class="project-name">-->
+            <!--                        Project Name-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </a>-->
+            <!--    </div>-->
+            <!--    <div class="col-lg-4 col-sm-6">-->
+            <!--        <a href="img/portfolio/fullsize/3.jpg" class="portfolio-box">-->
+            <!--            <img src="img/portfolio/thumbnails/3.jpg" class="img-responsive" alt="">-->
+            <!--            <div class="portfolio-box-caption">-->
+            <!--                <div class="portfolio-box-caption-content">-->
+            <!--                    <div class="project-category text-faded">-->
+            <!--                        Category-->
+            <!--                    </div>-->
+            <!--                    <div class="project-name">-->
+            <!--                        Project Name-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </a>-->
+            <!--    </div>-->
+            <!--    <div class="col-lg-4 col-sm-6">-->
+            <!--        <a href="img/portfolio/fullsize/4.jpg" class="portfolio-box">-->
+            <!--            <img src="img/portfolio/thumbnails/4.jpg" class="img-responsive" alt="">-->
+            <!--            <div class="portfolio-box-caption">-->
+            <!--                <div class="portfolio-box-caption-content">-->
+            <!--                    <div class="project-category text-faded">-->
+            <!--                        Category-->
+            <!--                    </div>-->
+            <!--                    <div class="project-name">-->
+            <!--                        Project Name-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </a>-->
+            <!--    </div>-->
+            <!--    <div class="col-lg-4 col-sm-6">-->
+            <!--        <a href="img/portfolio/fullsize/5.jpg" class="portfolio-box">-->
+            <!--            <img src="img/portfolio/thumbnails/5.jpg" class="img-responsive" alt="">-->
+            <!--            <div class="portfolio-box-caption">-->
+            <!--                <div class="portfolio-box-caption-content">-->
+            <!--                    <div class="project-category text-faded">-->
+            <!--                        Category-->
+            <!--                    </div>-->
+            <!--                    <div class="project-name">-->
+            <!--                        Project Name-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </a>-->
+            <!--    </div>-->
+            <!--    <div class="col-lg-4 col-sm-6">-->
+            <!--        <a href="img/portfolio/fullsize/6.jpg" class="portfolio-box">-->
+            <!--            <img src="img/portfolio/thumbnails/6.jpg" class="img-responsive" alt="">-->
+            <!--            <div class="portfolio-box-caption">-->
+            <!--                <div class="portfolio-box-caption-content">-->
+            <!--                    <div class="project-category text-faded">-->
+            <!--                        Category-->
+            <!--                    </div>-->
+            <!--                    <div class="project-name">-->
+            <!--                        Project Name-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--        </a>-->
+            <!--    </div>-->
+            <!--</div>-->
+            <div class="mycanvas2">
+                <canvas class="dragTarget" id="myphoto2" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>讓老闆聽聽你的心裡話吧!</h2>
+                <!--<button type="button" -->
+                <!--        class="btn btn-default btn-xl sr-button" -->
+                <!--        id="triggerLoginButton"  data-target="#loginModal"-->
+                <!--        data-toggle="modal"-->
+                <!--        data-backdrop="static">-->
+                <!--    Download Now!-->
+                <!--</button>-->
+                
+                 <button type="button" 
+                        class="btn btn-default btn-xl sr-button" 
+                        id="triggerLoginButton"  data-target="#loginModal">
+                    Download Now!
+                </button>
+                
+                <!--<a id="aDownload" href="#" class="btn btn-default btn-xl sr-button" download="to_boss.jpg" data-target="#loginModal">-->
+                <!--    Download Now!-->
+                <!--</a>-->
+            </div>
+            
+            
+            <div id="loginModal" class="modal fade" role="dialog">
+            <!--建立對話框-->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4>不自殺聲明</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>本人在此特地聲明，謹此宣告，絕不自殺，絕不發生意外。</p>
+                            <p>本人樂觀開朗，身體健康，近期至未來五十年之人生規劃都已妥當，交友廣闊，身無隱疾，且家中尚有老父老母需奉養，絕無任何自殺輕生之意圖。近期也未規劃前往外地旅遊踏青，生活作息正常，更無機會接觸木炭、毒藥、槍砲彈藥等危險管制物品。</p>
+                            <p>本人並無任何使我困擾之慢性病或心理疾病，故絕不可能做出任何看似自殺之行為。</p>
+                            <p>本人從無睡眠困擾，故不需服用安眠藥，更不會有服用過量的問題。</p>
+                            <p>本人強調個人不酗酒也不吸毒。</p>
+                            <p>本人近期嚴守其身絕不會接近下列地點，例如：</p>
+                            <p>1. 開放性水域以及偏郊積水攤<br />2. 任何無救生員之游泳池<br />3. 有高壓、危險氣體，或密閉式未經抽氣處理之地下室、蓄水池、水桶等<br />4. 無安全護欄之任何高處<br />5. 任何施工地點（拆政府除外），包括製作消波塊之工地<br />6. 任何以上未提及但為一般人正常不會前往之地點</p>
+                            <p>本人恪遵下列事項：</p>
+                            <p>1. 開車或騎摩托車之前會檢查煞車部件、油門線等，並會在加油前關閉車輛電源與行動電話。<br />2. 絕不擅搶黃燈、闖紅燈。<br />3. 乘坐任何軌道類交通工具，本人一定退到警戒線後一步以上，直到車輛停妥。<br />4. 騎乘機車必戴安全帽；乘車必繫安全帶。<br />5. 絕不接近任何會放射對人體有立即危害的輻射之場所（如核電廠）或設備。<br />6. 颱風天不登山、不觀浪。</p>
+                            <p>本人將盡可能注意居家電器、瓦斯、火源之使用。<br />。本人居住之房屋均使用符合法規之電路電線，絕無電線走火之可能；<br />。本人絕對不在家中置放過量可燃性氣體或液體。<br />。浴室中除該有之照明外，不放置任何電器用品，<br />。睡覺前會關閉大量耗能電器，僅保持電燈、冰箱、電扇外之所有電器開關。<br />。本人絕不會與隨機的不明人士起衝突，並盡可能保護自我人身安全。</p>
+                            <p>若本人被發現死亡，且現場無外力及打鬥掙扎痕跡，如在車內房間等等隱蔽場所，絕非本人自殺。</p>
+                            <div>
+                                <!--data-dismiss="modal"可以關閉對話盒-->
+                                <!--<button type="button" id="loginButton" class="btn btn-success" data-dismiss="modal">-->
+                                <!--<span class="glyphicon glyphicon-off"></span>我已閱讀並同意-->
+                                <!--</button>-->
+                                
+                                <!--需要下載改為<a>-->
+                                <a href="#" id="aDownload" class="btn btn-success" 
+                                        download="to_boss.jpg"
+                                        data-dismiss="modal">
+                                <span class="glyphicon glyphicon-download-alt"></span> 我已閱讀並同意
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <p>1.該聲明無法確實保障人身安全<br />
+                        2.該聲明無法避免確定的殺身之禍<br />
+                        3.請隨時注意自身安全，鄉民無法保護您</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x sr-contact"></i>
+                    <p>(04) 23265860</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:amaxr4@gmail.com">amaxr4@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/creative.min.js"></script>
+    <script>
+    
+        $(function (){
+            $("#triggerLoginButton").click(function(){
+                $("#loginModal").modal({backdrop:"static"});
+            });
+            
+            $("#aDownload").click(function() {
+                $("#loginModal").modal("hide"); //下載後關閉對話盒
+            });
+        });
+        //建立畫布
+        var ctx = myphoto.getContext("2d");
+        var ctx2 = myphoto2.getContext("2d");
+
+        
+    
+    
+    
+        function doDragStart(e) {
+            //document.getElementById("debug").innerHTML += e.target.id + " start dragging. <br/>";
+            e.target.style.opacity = '0.4'; //點選拖曳時產生半透明
+            //dataTransfer.setData() 方法设置被拖数据的数据类型和值：,之後用在doDrop---Get資料出來
+            e.dataTransfer.setData("text/plain", e.target.id);
+        }
+        photo2.ondragstart = doDragStart;
+        photo3.ondragstart = doDragStart;
+        photo4.ondragstart = doDragStart;
+    
+    
+    
+        //數據/元素不能被其他元素下降。要允許降，一定要防止元素的默認處理
+        //ondragover事件指定了拖動的數據可以被丟棄
+        function doDragOver(e) {
+            //document.getElementById("debug").innerHTML+=e.target.id+"- OnDragOver<br />";
+            //阻止元素发生默认的行为
+            e.preventDefault();
+        }
+        myphoto.ondragover = doDragOver;
+    
+        function doDragEnter(e) {
+            //document.getElementById("debug").innerHTML += e.target.id + "- OnDragEnter<br />";
+            e.target.classList.add("dragOver"); //event前面可剃除前縐詞 如使用 "click" ,而不是使用 "onclick"。 ondragOver ,"dragOver" 
+            e.preventDefault();
+        }
+    
+        function doDragLeave(e) {
+            //document.getElementById("debug").innerHTML += e.target.id + " - OnDragLeave<br />";
+            e.target.classList.remove("dragOver");
+            e.preventDefault();
+        }
+        myphoto.ondragenter = doDragEnter;
+        myphoto.ondragleave = doDragLeave;
+    
+    
+        function bt1_onclick() {
+    
+            var obj = document.getElementsByName("radio_position"); //这个是以標籤的name來控制元件
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].checked) {
+                    //設定顏色
+                    var colortext = obj[i].value; 
+                    
+                    //點選的文字
+                    var myselect = document.getElementById("sel1");
+                    myselect = myselect.options[myselect.selectedIndex].text;
+    
+                    //將文字放入圖片
+                    // 置中對齊輸出文字
+                    ctx.font = "24px Arial";
+                    ctx.fillStyle = colortext;
+                    ctx.textBaseline = "top";
+                    ctx.textAlign = "let";
+                    ctx.fillText(myselect, 40,50,350); //(要的文字,x,y,最大寬度)無法換行
+                    
+                    ctx2.font = "24px Arial";
+                    ctx2.fillStyle = colortext;
+                    ctx2.textBaseline = "top";
+                    ctx2.textAlign = "let";
+                    ctx2.fillText(myselect, 40, 50,350); //(要的文字,x,y,最大寬度)無法換行
+                    //輸出文字邊框加強效果
+                    ctx.font = "24px Arial";
+                    ctx.textBaseline = "top";
+                    ctx.textAlign = "let";
+                    ctx.strokeStyle = colortext;
+                    
+                    ctx2.font = "24px Arial";
+                    ctx2.textBaseline = "top";
+                    ctx2.textAlign = "let";
+                    ctx2.strokeStyle = colortext;
+                    
+                    ctx.strokeText(myselect, 40, 50,350);
+                    ctx2.strokeText(myselect, 40, 50,350);
+
+                    
+                    //如果複製屬性會連id一起複製,造成寫在同一張畫布!
+                    // if(ctx2.canvas.id!=ctx.canvas.id){
+                    //     var changID=ctx;
+                    //     ctx2=changID;
+                    //     ctx2.canvas.id="myphoto2";
+                        
+                    // }
+                    // //  ctx.fillText(myselect, 40, 50); 
+                    // //  ctx.strokeText(myselect, 40, 50);
+                    //  ctx2.fillText(myselect, 40, 50); 
+                    //  ctx2.strokeText(myselect, 40, 50);
+                    
+                    aDownload.href=myphoto2.toDataURL("image/png");
+    
+                }
+            }
+        }
+    
+    
+    
+            // 滑鼠按鍵放開時的 Drop 事件
+            function doDrop(e) {
+                //document.getElementById("debug").innerHTML += e.target.id + " - OnDrop<br />";
+                var sSourceId = e.dataTransfer.getData("text/plain"); //前面有setData
+                e.target.appendChild(document.getElementById(sSourceId));
+                document.getElementById(sSourceId).style.opacity = 1.0;
+                e.target.classList.remove("dragOver");
+                // var dimg=document.getElementById("");
+                // for(var i=0;i<arr.length;i++){
+                //         if(i==0){
+                //             i=1;
+                //         dimg=document.getElementById("photo"+i);
+                //         ctx.drawImage(dimg,0,0,400,300);
+                //         document.getElementById("debug").innerHTML += "Info: " + sSourceId + "<br />";
+                //     }
+                //     else if (i==1){
+                //         dimg=document.getElementById("photo"+i);
+                //         i=2;
+                //         ctx.drawImage(dimg,0,0,400,300);
+                //         document.getElementById("debug").innerHTML += "Info: " + sSourceId + "<br />";
+                //     }
+                // }
+    
+                var dimg = document.getElementById(sSourceId); //dimg-使用者點選到的圖片
+                ctx.drawImage(dimg, 0, 0, 400, 300);
+                ctx2.drawImage(dimg, 0, 0, 400, 300);
+                //document.getElementById("debug").innerHTML += "Info: " + sSourceId + "<br />";
+                e.preventDefault();
+            }
+    
+            //.ondrop 在可拖动元素放置在 <div> 元素中时执行 JavaScript:
+            myphoto.ondrop = doDrop;
+            myphoto2.ondrop = doDrop;
+            
+    </script>
+        
+</body>
+
+</html>

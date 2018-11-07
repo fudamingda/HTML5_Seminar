@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5小專作品</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+
+    <style>
+        .dragTarget {
+            margin: 0 10px;
+            border: 1px solid #000000;
+            width: 400px;
+            height: 300px;
+        }
+
+        .dragTarget .sourcephoto {
+            width: 100%;
+        }
+
+        .dragOver {
+            border: dashed red;
+        }
+
+        .item {
+            width: 100%;
+        }
+
+        .photo {
+            width: 38%;
+            display: inline-block;
+        }
+
+        .choose {
+            width: 62%;
+        }
+
+        .choose .photocontent {
+            display: inline-block;
+        }
+
+        .sourcephoto {
+            width: 10%;
+        }
+
+        /* .form >p {*/
+
+        /*    display:inline-block;*/
+
+        /*}*/
+
+        /*.form >div {*/
+
+        /*    display: inline-block;*/
+
+        /*}*/
+
+        /*.form >div>.radio {*/
+
+        /*    display: inline-block;*/
+
+        /*}*/
+
+        hr {
+            max-width: 0;
+        }
+
+        .btn {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="item">
+        <div class="photo">
+            <canvas class="dragTarget" id="myphoto" width="400" height="300"></canvas>
+        </div>
+        <!--放置圖片-->
+        <!--相關屬性
+                        1.draggable 属性规定元素是否可拖动
+                        2.ondragstart 在拖动操作开端运行的脚本-->
+        <div class="choose" style="display:inline">
+            <div class="photocontent">
+                <img id="photo1" class="sourcephoto" src="choose_photo1.jpg" draggable="true" ondragstart="doDragStart(event)">
+                <img id="photo2" class="sourcephoto" src="choose_photo2.jpg" draggable="true">
+                <img id="photo3" class="sourcephoto" src="choose_photo3.jpg" draggable="true">
+                <img id="photo4" class="sourcephoto" src="choose_photo4.jpg" draggable="true">
+                <input class="btn btn-primary" type="button" value="重新製作" onclick="location.href='test_drop.html';">
+            </div>
+        </div>
+        <form>
+            <label for="textSample">請選擇範例文字 :</label>
+            <label for="sel1">Select list:</label>
+            <select class="form-control" id="sel1">
+                                <option value="1">有拜有保佑,越動越健康</option>
+                                <option value="2">早安!當我們老在一起</option>
+                                <option value="3">平安就是幸福,知足惜福</option>
+                                <option value="4">人生最大的財富就是健康</option>
+                            </select>
+            <div class=form>
+                <p>選擇字體顏色: </p>
+                <div class="font-color">
+                    <div class="radio">
+                        <input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_1" value="red">
+                        <label for="value_1">red</label>
+                    </div>
+                    <div class="radio">
+                        <input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_2" value="DodgerBlue">
+                        <label for="value_1">DodgerBlue</label>
+                    </div>
+                    <div class="radio">
+                        <input autocomplete="off" type="radio" name="radio_position" onclick="click_position(this)" id="value_3" value="Orange">
+                        <label for="value_1">Orange</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+            <div id="debug"></div>
+            <button type="button" id="bt1" onclick="bt1_onclick()">送出</button>
+
+    </div>
+
+
+
+
+     <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        //建立畫布
+        var ctx = myphoto.getContext("2d");
+
+
+
+        function doDragStart(e) {
+            document.getElementById("debug").innerHTML += e.target.id + " start dragging. <br/>";
+            e.target.style.opacity = '0.4'; //點選拖曳時產生半透明
+            //dataTransfer.setData() 方法设置被拖数据的数据类型和值：,之後用在doDrop---Get資料出來
+            e.dataTransfer.setData("text/plain", e.target.id);
+        }
+        photo2.ondragstart = doDragStart;
+        photo3.ondragstart = doDragStart;
+        photo4.ondragstart = doDragStart;
+
+
+
+        //數據/元素不能被其他元素下降。要允許降，一定要防止元素的默認處理
+        //ondragover事件指定了拖動的數據可以被丟棄
+        function doDragOver(e) {
+            //document.getElementById("debug").innerHTML+=e.target.id+"- OnDragOver<br />";
+            //阻止元素发生默认的行为
+            e.preventDefault();
+        }
+        myphoto.ondragover = doDragOver;
+
+        function doDragEnter(e) {
+            document.getElementById("debug").innerHTML += e.target.id + "- OnDragEnter<br />";
+            e.target.classList.add("dragOver"); //event前面可剃除前縐詞 如使用 "click" ,而不是使用 "onclick"。 ondragOver ,"dragOver" 
+            e.preventDefault();
+        }
+
+        function doDragLeave(e) {
+            document.getElementById("debug").innerHTML += e.target.id + " - OnDragLeave<br />";
+            e.target.classList.remove("dragOver");
+            e.preventDefault();
+        }
+        myphoto.ondragenter = doDragEnter;
+        myphoto.ondragleave = doDragLeave;
+
+
+        function bt1_onclick() {
+
+            var obj = document.getElementsByName("radio_position"); //这个是以標籤的name來控制元件
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].checked) {
+                    var colortext = obj[i].value;
+                    //點選的文字
+                    var myselect = document.getElementById("sel1");
+                    myselect = myselect.options[myselect.selectedIndex].text;
+
+                    //將文字放入圖片
+                    // 置中對齊輸出文字
+                    ctx.font = "24px Arial";
+                    ctx.fillStyle = colortext;
+                    ctx.textBaseline = "top";
+                    ctx.textAlign = "let";
+                    ctx.fillText(myselect, 40, 50); //(要的文字,x,y)無法換行
+                    //輸出文字邊框加強效果
+                    ctx.font = "24px Arial";
+                    ctx.textBaseline = "top";
+                    ctx.textAlign = "let";
+                    ctx.strokeStyle = colortext;
+                    ctx.strokeText(myselect, 40, 50);
+
+                }
+            }
+        }
+
+
+
+            // 滑鼠按鍵放開時的 Drop 事件
+            function doDrop(e) {
+                document.getElementById("debug").innerHTML += e.target.id + " - OnDrop<br />";
+                var sSourceId = e.dataTransfer.getData("text/plain"); //前面有setData
+                e.target.appendChild(document.getElementById(sSourceId));
+                document.getElementById(sSourceId).style.opacity = 1.0;
+                e.target.classList.remove("dragOver");
+                // var dimg=document.getElementById("");
+                // for(var i=0;i<arr.length;i++){
+                //         if(i==0){
+                //             i=1;
+                //         dimg=document.getElementById("photo"+i);
+                //         ctx.drawImage(dimg,0,0,400,300);
+                //         document.getElementById("debug").innerHTML += "Info: " + sSourceId + "<br />";
+                //     }
+                //     else if (i==1){
+                //         dimg=document.getElementById("photo"+i);
+                //         i=2;
+                //         ctx.drawImage(dimg,0,0,400,300);
+                //         document.getElementById("debug").innerHTML += "Info: " + sSourceId + "<br />";
+                //     }
+                // }
+
+                var dimg = document.getElementById(sSourceId); //dimg-使用者點選到的圖片
+                ctx.drawImage(dimg, 0, 0, 400, 300);
+                //document.getElementById("debug").innerHTML += "Info: " + sSourceId + "<br />";
+                e.preventDefault();
+            }
+
+            //.ondrop 在可拖动元素放置在 <div> 元素中时执行 JavaScript:
+            myphoto.ondrop = doDrop;
+    </script>
+
+</body>
+
+</html>
